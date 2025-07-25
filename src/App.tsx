@@ -1,9 +1,9 @@
-import { SignUp } from "./badui/SignUp";
+import { BadUIButton } from "./badui/BadUIButton";
 
 function App() {
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <SignUp />
+      <BadUIButton />
     </div>
   );
 }
