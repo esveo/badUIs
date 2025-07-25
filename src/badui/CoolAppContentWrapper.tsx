@@ -51,6 +51,7 @@ export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapp
 
   return (
     <div className={`w-full h-full flex items-center justify-center ${props.wrapperClassName}`}>
+      <div className="absolute text-red-600 top-0">Your cursor is afraid of the red dot...</div>
       {props.children}
       <div ref={mouseClickHighlightRef} style={{ top: virtualCursorPos.y, left: virtualCursorPos.x }} />
       <img
