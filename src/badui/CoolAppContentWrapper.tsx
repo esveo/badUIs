@@ -10,7 +10,7 @@ let virtualCursorY = 0;
 const RADIUS = 20;
 const SPEED = 3;
 const MIN_DISTANCE = 100;
-const MAX_DISTANCE = 300;
+const MAX_DISTANCE = 600;
 
 /**
  * Usage example:
@@ -115,8 +115,8 @@ function processTick() {
 
   // add a factor that decreases by distance (min distance is taken, closer will not increase speed)
   const distanceFactor = distance > MAX_DISTANCE ? 0 : MIN_DISTANCE / Math.max(distance, MIN_DISTANCE);
-  dx *= distanceFactor ** 1.5;
-  dy *= distanceFactor ** 1.5;
+  dx *= distanceFactor ** 2;
+  dy *= distanceFactor ** 2;
 
   // run clamping
   virtualCursorX = Math.min(Math.max(virtualCursorX + dx, RADIUS), window.innerWidth - RADIUS);
