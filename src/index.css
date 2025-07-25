@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+@keyframes dropDown {
+  0% {
+    transform: translateX(0px) translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(30px) translateY(55px) rotate(72deg);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(50px) translateY(110px) rotate(144deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(50px) translateY(165px) rotate(216deg);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(50px) translateY(210px) rotate(288deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(50px) translateY(220px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.drop-element {
+  animation: dropDown 3s linear forwards;
+}
