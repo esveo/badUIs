@@ -69,6 +69,9 @@ export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapp
           // position needs to be 1px higher to move above the virtual cursor image
           const targetElement = document.elementFromPoint(virtualCursorPos.x, virtualCursorPos.y - 1);
           targetElement?.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+          if (targetElement && "focus" in targetElement) {
+            (targetElement as HTMLElement).focus();
+          }
           const current = mouseClickHighlightRef.current;
           if (!current) return;
           current.classList.remove(styles["mouse-click-highlight"]);
