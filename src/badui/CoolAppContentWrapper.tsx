@@ -84,7 +84,6 @@ export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapp
         onWheel={(e) => {
           e.stopPropagation();
           const targetElement = document.elementFromPoint(virtualCursorPos.x, virtualCursorPos.y - 1);
-          console.log("Wheel event on virtual cursor", e.deltaY, targetElement);
           targetElement?.dispatchEvent(new WheelEvent("wheel", { deltaY: e.deltaY, bubbles: true }));
         }}
         className={`bg-red-600 absolute opacity-50 cursor-none`}
