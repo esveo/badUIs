@@ -10,6 +10,7 @@ let virtualCursorY = 0;
 const RADIUS = 20;
 const SPEED = 3;
 const MIN_DISTANCE = 100;
+const MAX_DISTANCE = 300;
 
 /**
  * Usage example:
@@ -80,6 +81,12 @@ export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapp
           current.getBoundingClientRect();
           current.classList.add(styles["mouse-click-highlight"]);
         }}
+        onWheel={(e) => {
+          e.stopPropagation();
+          const targetElement = document.elementFromPoint(virtualCursorPos.x, virtualCursorPos.y - 1);
+          console.log("Wheel event on virtual cursor", e.deltaY, targetElement);
+          targetElement?.dispatchEvent(new WheelEvent("wheel", { deltaY: e.deltaY, bubbles: true }));
+        }}
         className={`bg-red-600 absolute opacity-50 cursor-none`}
         style={{
           height: RADIUS * 2,
@@ -107,7 +114,7 @@ function processTick() {
   let dy = SPEED * normalizedDistanceY;
 
   // add a factor that decreases by distance (min distance is taken, closer will not increase speed)
-  const distanceFactor = MIN_DISTANCE / Math.max(distance, MIN_DISTANCE);
+  const distanceFactor = distance > MAX_DISTANCE ? 0 : MIN_DISTANCE / Math.max(distance, MIN_DISTANCE);
   dx *= distanceFactor ** 1.5;
   dy *= distanceFactor ** 1.5;
 

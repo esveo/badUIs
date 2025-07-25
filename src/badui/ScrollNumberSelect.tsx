@@ -22,10 +22,17 @@ export function ScrollNumberSelect() {
         onClick={() => window.alert("You need to scroll here and not click!")}
         onScroll={(e) => {
           const scrollTop = e.currentTarget.scrollTop;
-          setValue(Math.round(scrollTop));
+          setValue(Math.round(scrollTop / 2));
+        }}
+        onWheel={(e) => {
+          e.stopPropagation();
+          // dispatch on scroll event to update value
+          e.currentTarget.scrollTop += e.deltaY;
+          // update value based on scroll position
+          e.currentTarget.dispatchEvent(new Event("scroll"));
         }}
       >
-        <div className="h-[100014px]" />
+        <div className="h-[200014px]" />
       </div>
     </div>
   );
