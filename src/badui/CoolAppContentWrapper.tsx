@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+import CursorImage from "../assets/cursor.png";
 import styles from "./CoolAppContentWrapper.module.css";
 
 let mouseX = 0;
@@ -21,9 +22,18 @@ const MAX_DISTANCE = 600;
  * </CoolAppContentWrapper>
  * ```
  */
-export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapperClassName?: string }) {
-  const [pos, setPos] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-  const [virtualCursorPos, setVirtualCursorPos] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+export function CoolAppContentWrapper(props: {
+  children?: React.ReactNode;
+  wrapperClassName?: string;
+}) {
+  const [pos, setPos] = useState({
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  });
+  const [virtualCursorPos, setVirtualCursorPos] = useState({
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,15 +61,22 @@ export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapp
   const mouseClickHighlightRef = useRef<HTMLImageElement>(null);
 
   return (
-    <div className={`w-full h-full flex items-center justify-center ${props.wrapperClassName}`}>
-      <div className="absolute text-red-600 top-0">Your cursor is afraid of the red dot...</div>
+    <div
+      className={`w-full h-full flex items-center justify-center ${props.wrapperClassName}`}
+    >
+      <div className="absolute text-red-600 top-0">
+        Your cursor is afraid of the red dot...
+      </div>
       {props.children}
-      <div ref={mouseClickHighlightRef} style={{ top: virtualCursorPos.y, left: virtualCursorPos.x }} />
+      <div
+        ref={mouseClickHighlightRef}
+        style={{ top: virtualCursorPos.y, left: virtualCursorPos.x }}
+      />
       <img
         tabIndex={-1}
         // inert prevents element from being focusable and clickable
         inert
-        src="/cursor.png"
+        src={CursorImage}
         className="absolute h-[24px] w-[20px]"
         // left is offset by 8px to center the tip of the finger on the cursor position
         style={{ top: virtualCursorPos.y, left: virtualCursorPos.x - 8 }}
@@ -69,8 +86,13 @@ export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapp
           e.preventDefault();
           e.stopPropagation();
           // position needs to be 1px higher to move above the virtual cursor image
-          const targetElement = document.elementFromPoint(virtualCursorPos.x, virtualCursorPos.y - 1);
-          targetElement?.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+          const targetElement = document.elementFromPoint(
+            virtualCursorPos.x,
+            virtualCursorPos.y - 1
+          );
+          targetElement?.dispatchEvent(
+            new MouseEvent("click", { bubbles: true, cancelable: true })
+          );
           if (targetElement && "focus" in targetElement) {
             (targetElement as HTMLElement).focus();
           }
@@ -83,8 +105,13 @@ export function CoolAppContentWrapper(props: { children?: React.ReactNode; wrapp
         }}
         onWheel={(e) => {
           e.stopPropagation();
-          const targetElement = document.elementFromPoint(virtualCursorPos.x, virtualCursorPos.y - 1);
-          targetElement?.dispatchEvent(new WheelEvent("wheel", { deltaY: e.deltaY, bubbles: true }));
+          const targetElement = document.elementFromPoint(
+            virtualCursorPos.x,
+            virtualCursorPos.y - 1
+          );
+          targetElement?.dispatchEvent(
+            new WheelEvent("wheel", { deltaY: e.deltaY, bubbles: true })
+          );
         }}
         className={`bg-red-600 absolute opacity-50 cursor-none`}
         style={{
@@ -113,11 +140,20 @@ function processTick() {
   let dy = SPEED * normalizedDistanceY;
 
   // add a factor that decreases by distance (min distance is taken, closer will not increase speed)
-  const distanceFactor = distance > MAX_DISTANCE ? 0 : MIN_DISTANCE / Math.max(distance, MIN_DISTANCE);
+  const distanceFactor =
+    distance > MAX_DISTANCE
+      ? 0
+      : MIN_DISTANCE / Math.max(distance, MIN_DISTANCE);
   dx *= distanceFactor ** 2;
   dy *= distanceFactor ** 2;
 
   // run clamping
-  virtualCursorX = Math.min(Math.max(virtualCursorX + dx, RADIUS), window.innerWidth - RADIUS);
-  virtualCursorY = Math.min(Math.max(virtualCursorY + dy, RADIUS), window.innerHeight - RADIUS);
+  virtualCursorX = Math.min(
+    Math.max(virtualCursorX + dx, RADIUS),
+    window.innerWidth - RADIUS
+  );
+  virtualCursorY = Math.min(
+    Math.max(virtualCursorY + dy, RADIUS),
+    window.innerHeight - RADIUS
+  );
 }

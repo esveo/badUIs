@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import Asset1 from "../assets/1.png";
+import Asset2 from "../assets/2.png";
+import Asset3 from "../assets/3.png";
+import CanImage from "../assets/can.jpeg";
 const passwordTooShortMessages = [
   "That password's so short, even a goldfish could remember it.",
   "Is that your password or a whisper? Try something longer!",
@@ -62,7 +66,7 @@ export function SignUp() {
       {monkeyPhotoNumber === 1 && (
         <div
           style={{
-            backgroundImage: `url("/1.png")`,
+            backgroundImage: `url(${Asset1})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -72,7 +76,7 @@ export function SignUp() {
       {monkeyPhotoNumber === 2 && (
         <div
           style={{
-            backgroundImage: `url("/2.png")`,
+            backgroundImage: `url(${Asset2})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -82,7 +86,7 @@ export function SignUp() {
       {monkeyPhotoNumber === 3 && (
         <div
           style={{
-            backgroundImage: `url("/3.png")`,
+            backgroundImage: `url(${Asset3})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -186,7 +190,7 @@ export function SignUp() {
           {!!dropLetterList.length && (
             <div
               style={{
-                backgroundImage: `url("/can.jpeg")`,
+                backgroundImage: `url(${CanImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
