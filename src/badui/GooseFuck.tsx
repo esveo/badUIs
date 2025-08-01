@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
+// Inspired by goosefuck.com
+
 type Color = [number, number, number]; // [Hue (0-360), Chroma (0-0.4), Lightness (0-1)]
 type Position = { x: number; y: number };
 

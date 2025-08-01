@@ -62,7 +62,7 @@ export function SignUp() {
     return <p className="text-red-500">{message}</p>;
 
   return (
-    <div className="flex flex-col w-full justify-start pl-10 self-start">
+    <div className="flex flex-col justify-start pl-10 self-start mx-auto">
       {monkeyPhotoNumber === 1 && (
         <div
           style={{

@@ -1,5 +1,7 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
 
+// inspired by https://www.reddit.com/r/badUIbattles/comments/1llmai1/enter_your_phone_numberif_youre_a_skilled_marksman/
+
 export function BadNumberSelector() {
   const [numberSelectorOpen, setNumberSelectorOpen] = useState(false);
   const [currentNumber, setCurrentNumber] = useState<null | number>();
@@ -14,6 +16,15 @@ export function BadNumberSelector() {
         >
           {currentNumber}
         </div>
+        <span>
+          Inspired by{" "}
+          <a
+            href="https://www.reddit.com/r/badUIbattles/comments/1llmai1/enter_your_phone_numberif_youre_a_skilled_marksman/"
+            className="text-blue-500"
+          >
+            Reddit
+          </a>
+        </span>
         {numberSelectorOpen ? (
           <span>Hit the black circle to close</span>
         ) : (

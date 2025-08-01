@@ -15,6 +15,15 @@ export function ColorPicker() {
       >
         Open Color Picker
       </button>
+      <span className="text-sm">
+        Inspired by{" "}
+        <a
+          href="https://www.reddit.com/r/badUIbattles/comments/1kq3pj2/goose_breeding_color_picker/"
+          className="text-blue-500"
+        >
+          Reddit
+        </a>
+      </span>
 
       {isOpen && (
         <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center p-4">
